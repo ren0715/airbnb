@@ -11,6 +11,8 @@
 
     <body style="margin-top:72px;" class="footerFixed">
         <%= render 'layouts/header' %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         <%= yield %>
         <%= render 'layouts/footer' %>
     </body>
