@@ -14,11 +14,14 @@
             </ul>
             <ul class="navbar-nav mb-2 ml-auto mb-md-0">
                 <li class="nav-item">
-                    <%= link_to "Become a host",new_room_path, class:"btn nav-link"%>
+                    <%= link_to "Become a host",new_room_path, class:"border mt-2 nav-link"%>
                 </li>
                 <% if user_signed_in?%>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"><%= current_user.name %></a>
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                            <%= image_tag(current_user.get_gravatar, alt: current_user.name, class: 'rounded-circle w-25')%>
+                            <%= current_user.name %>
+                        </a>
 
                         <div class="dropdown-menu">
                             <%= link_to "Manage Room","#", class: "dropdown-item" %>
