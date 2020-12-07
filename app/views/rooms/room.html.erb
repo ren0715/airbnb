@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <%=render 'publish'%>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Room</h2>
+                </div>
+                <div class="card-body">
+                    <%= form_for @room do |f| %>
+                        <div class="container row">
+                            <div class="col-md-4 field form-group">
+                                <%= f.label :home_type, 'Home Type' %>
+                                <%= f.select :home_type, {'Apartment': 'Apartment', 'House': 'House', 'Bed & Breakfast': 'Bed & Breakfast'}, { include_blank: 'Select...'}, { class: 'form-control w-100' , required: true } %>
+                            </div>
+
+                            <div class="col-md-4 field form-group">
+                                <%= f.label :room_type, 'Room Type' %>
+                                <%= f.select :room_type, {'Entire': 'Entire', 'Private': 'Private', 'Shared': 'Shared'}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                            </div>
+
+                            <div class="col-md-4 field form-group">
+                                <%= f.label :guest_count, 'Guests' %>
+                                <%= f.select :guest_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                            </div>
+
+                            <div class="col-md-4 field form-group">
+                                <%= f.label :bedroom_count, 'Bedrooms' %>
+                                <%= f.select :bedroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                            </div>
+
+                            <div class="col-md-4 field form-group">
+                                <%= f.label :bathroom_count, 'Bathrooms' %>
+                                <%= f.select :bathroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                            </div>
+
+                            
+                        </div>
+                        <div class="actions form-group">
+                            <%= f.submit "Save",class: 'btn btn-info w-100 mt-3'%>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

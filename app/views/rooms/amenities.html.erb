@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <%=render 'publish'%>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Amenities</h2>
+                </div>
+                <div class="card-body">
+                    <%= form_for @room do |f| %>
+                        <div class="container row">
+                            <div class="col-md-4 field form-group">
+                                <%= f.check_box :has_tv, class: '' %>
+                                <%= f.label :has_tv, 'TV' %>
+                            </div>
+                            <div class="col-md-4 field form-group">
+                                <%= f.check_box :has_kitchen, class: '' %>
+                                <%= f.label :has_kitchen, 'Kitchen' %>
+                            </div>
+                            <div class="col-md-4 field form-group">
+                                <%= f.check_box :has_internet, class: '' %>
+                                <%= f.label :has_internet, 'Internet' %>
+                            </div>
+                            <div class="col-md-4 field form-group">
+                                <%= f.check_box :has_heating, class: '' %>
+                                <%= f.label :has_heating, 'Heating' %>
+                            </div>
+                            <div class="col-md-4 field form-group">
+                                <%= f.check_box :has_air_conditioning, class: '' %>
+                                <%= f.label :has_air_conditioning, 'Air Conditioning' %>
+                            </div>
+                            
+                        </div>
+                        <div class="actions form-group">
+                            <%= f.submit "Save",class: 'btn btn-info w-100 mt-3'%>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
