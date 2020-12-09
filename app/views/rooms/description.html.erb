@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <%=render 'publish'%>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Description</h2>
+                </div>
+                <div class="card-body">
+                    <%= form_for @room do |f| %>
+                        <div class="container row">
+                            <div class="col-md-12 field form-group form-inline mx-auto">
+                                <%= f.label :room_name, 'Room Name' %>
+                                <%= f.text_field :room_name, { class: 'form-control w-100' , required: true ,placeholder: 'What is your room name?'} %>
+                            </div>
+                            <div class="col-md-12 field form-group form-inline mx-auto">
+                                <%= f.label :summary, 'Summary' %>
+                                <%= f.text_area :summary, { class: 'form-control w-100' , required: true ,placeholder: 'Write the summary of your house.'} %>
+                            </div>
+                        </div>
+                            
+                        <div class="actions form-group">
+                            <%= f.submit "Save",class: 'btn btn-info w-100 mt-3'%>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

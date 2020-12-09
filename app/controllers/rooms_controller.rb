@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :get_room, except: [:new]
+
   def new
     @room = Room.new
   end
@@ -13,8 +15,30 @@ class RoomsController < ApplicationController
     end
   end
 
+  def room
+  end
+
+  def price
+  end
+
+  def description
+  end
+
+  def photos
+  end
+
+  def amenities
+  end
+
+  def location
+  end
+
   private
   def room_params
     params.require(:room).permit(:home_type, :room_type, :guest_count, :bedroom_count, :bathroom_count)
+  end
+
+  def get_room
+    @room = Room.find(params[:id])
   end
 end
