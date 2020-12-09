@@ -76,3 +76,5 @@ gem 'will_paginate-bootstrap4'
 gem 'yaml_db'
 
 gem 'devise'
+
+gem 'activestorage'
