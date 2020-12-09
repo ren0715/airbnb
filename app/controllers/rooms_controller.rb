@@ -1,5 +1,9 @@
 class RoomsController < ApplicationController
-  before_action :get_room, except: [:new, :create]
+  before_action :get_room, except: [:new, :create, :index]
+
+  def index
+    @rooms = current_user.rooms.paginate(page: params[:page], per_page: 10)
+  end
 
   def new
     @room = Room.new
