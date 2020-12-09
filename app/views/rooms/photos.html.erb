@@ -9,18 +9,34 @@
                     <h2 class="text-center">Photos</h2>
                 </div>
                 <div class="card-body">
-                    <%= form_for @room do |f| %>
+                    <%= form_for @room, url:photos_room_path(@room),method: "post",html: { :multipart => true }, enctype: 'multipart/form-data' do |f| %>
                         <div class="container row">
                             <div class="col-md-12 field form-group form-inline mx-auto">
-                                <%= f.label :price, "Select Photos :"%><br>
-                                <%= f.file_field :price, class: '',required: true %>
+                                <%= file_field_tag "photos[]", type: :file,multiple: true, required: true, class: 'mb-4 d-block'%>
                             </div>
                             
                         </div>
                         <div class="actions form-group">
-                            <%= f.submit "Save",class: 'btn btn-info w-100 mt-3'%>
+                            <%= f.submit "Add photos",class: 'btn btn-info w-100 mt-3'%>
                         </div>
                     <% end %>
+
+                    <div class="container row">
+                        <% @photos.each do |photo|%>
+                            <div class="col-md-4">
+                                <div class="card mt-4">
+                                    <div class="card-img-top preview">
+                                        <%=image_tag photo.image, class: 'w-100'%>
+                                    </div>
+                                    <div class="card-body">
+                                        <%=link_to room_photo_path(@room,photo),method: :delete do%>
+                                            <i class="fa fa-trash"></i>
+                                        <%end%>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>

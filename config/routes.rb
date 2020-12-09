@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'amenities'
       get 'location'
     end
+    resources :photos, only: [:create, :destroy]
   end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
