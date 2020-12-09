@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :get_room
-  skip_before_action :get_room, only: [:new, :create],raise: false
+  before_action :get_room, except: [:new]
 
   def new
     @room = Room.new
@@ -14,6 +13,24 @@ class RoomsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def room
+  end
+
+  def price
+  end
+
+  def description
+  end
+
+  def photos
+  end
+
+  def amenities
+  end
+
+  def location
   end
 
   private
