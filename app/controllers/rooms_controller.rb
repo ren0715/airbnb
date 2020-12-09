@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+  before_action :get_room
+  skip_before_action :get_room, only: [:new, :create],raise: false
+
   def new
     @room = Room.new
   end
@@ -13,32 +16,12 @@ class RoomsController < ApplicationController
     end
   end
 
-  def room
-    @room = Room.find(params[:id])
-  end
-
-  def price
-    @room = Room.find(params[:id])
-  end
-
-  def description
-    @room = Room.find(params[:id])
-  end
-
-  def photos
-    @room = Room.find(params[:id])
-  end
-
-  def amenities
-    @room = Room.find(params[:id])
-  end
-
-  def location
-    @room = Room.find(params[:id])
-  end
-
   private
   def room_params
     params.require(:room).permit(:home_type, :room_type, :guest_count, :bedroom_count, :bathroom_count)
+  end
+
+  def get_room
+    @room = Room.find(params[:id])
   end
 end
