@@ -1,2 +1,29 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+    <div class="container">
+        <h1>Home</h1>
+        <div class="row">
+            <% @rooms.each do |room|%>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-img-top">
+                            <%=image_tag room.photos.first.image, class: 'w-100'%>
+                        </div>
+                        <div class="card-body">
+                            <h3>
+                                <%=link_to room.room_name,room_path(room)%>
+                            </h3>
+                            <p>
+                                $<%=room.price%> - 
+                                <%=room.room_type%> - 
+                                <%= pluralize(room.bedroom_count, "Bedroom") %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class="paginate text-center">
+            <%= will_paginate @rooms%>
+        </div>
+    </div>
+</div>
