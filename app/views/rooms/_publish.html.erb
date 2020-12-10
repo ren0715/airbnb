@@ -1,55 +1,62 @@
 <div class="card">
     <div class="card-body row text-info">
-        <div class="col-9">
-            <%=link_to "Room",room_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <i class="fa fa-check text-info"></i>
-        </div>
-
-        <div class="col-9">
-            <%=link_to "Price",price_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <% if @room.price %>
+        <div class="row">
+            <div class="col-9">
+                <%=link_to "Room",room_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
                 <i class="fa fa-check text-info"></i>
-            <% end %>
-        </div>
+            </div>
 
-        <div class="col-9">
-            <%=link_to "Description",description_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <% if @room.room_name %>
+            <div class="col-9">
+                <%=link_to "Price",price_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
+                <% if @room.price %>
+                    <i class="fa fa-check text-info"></i>
+                <% end %>
+            </div>
+
+            <div class="col-9">
+                <%=link_to "Description",description_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
+                <% if @room.room_name %>
+                    <i class="fa fa-check text-info"></i>
+                <% end %>
+            </div>
+
+            <div class="col-9">
+                <%=link_to "Photos",photos_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
+                <% if !@room.photos.blank? %>
+                    <i class="fa fa-check text-info"></i>
+                <% end %>
+            </div>
+
+            <div class="col-9">
+                <%=link_to "Amenities",amenities_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
                 <i class="fa fa-check text-info"></i>
-            <% end %>
-        </div>
+            </div>
 
-        <div class="col-9">
-            <%=link_to "Photos",photos_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <% if @room.price %>
-                <i class="fa fa-check text-info"></i>
-            <% end %>
-        </div>
-
-        <div class="col-9">
-            <%=link_to "Amenities",amenities_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <i class="fa fa-check text-info"></i>
-        </div>
-
-        <div class="col-9">
-            <%=link_to "Location",location_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
-        </div>
-        <div class="col-3">
-            <% if @room.address %>
-                <i class="fa fa-check text-info"></i>
-            <% end %>
+            <div class="col-9">
+                <%=link_to "Location",location_room_path(@room),class: 'btn btn-list text-left text-info w-100'%>
+            </div>
+            <div class="col-3">
+                <% if @room.address %>
+                    <i class="fa fa-check text-info"></i>
+                <% end %>
+            </div>
+            <div class="col-12">
+                <%= form_for @room do |f| %>
+                    <%= f.hidden_field :is_active, value: true %>
+                    <%= f.submit "Publish",class: 'btn btn-info w-100 mx-auto mt-5', disabled: !is_ready?(@room) %>
+                <% end %>
+            </div>
         </div>
         
-        <%= link_to "Publish","#",class: 'btn btn-info btn-block w-100 mt-5',disabled: "disabled"%>
     </div>
 </div>
