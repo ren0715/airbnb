@@ -20,7 +20,8 @@ class RoomsController < ApplicationController
   end
 
   def update
-    if @room.update(room_params)
+    @final_params = is_ready?(@room) ? room_params.merge(is_active: true) : room_params
+    if @room.update(@final_params)
       redirect_to request.referrer
     else
       render 'room'
@@ -48,7 +49,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:home_type, :room_type, :guest_count, :bedroom_count, :bathroom_count, :price, :room_name, :summary, :address, :has_tv, :has_kitchen, :has_internet, :has_heating, :has_air_conditioning, :is_active)
+    params.require(:room).permit(:home_type, :room_type, :guest_count, :bedroom_count, :bathroom_count, :price, :room_name, :summary, :address, :has_tv, :has_kitchen, :has_internet, :has_heating, :has_air_conditioning)
   end
 
   def get_room
