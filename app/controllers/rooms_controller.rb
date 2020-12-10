@@ -19,6 +19,9 @@ class RoomsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def update
     @final_params = is_ready?(@room) ? room_params.merge(is_active: true) : room_params
     if @room.update(@final_params)
