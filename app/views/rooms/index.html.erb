@@ -11,9 +11,9 @@
                 <div class="card-body">
                     <% @rooms.each do |room| %>
                         <div class="container row">
-                            <div class="col-3">picture</div>
+                            <div class="col-3"><%=image_tag room.photos.first.image, class: 'w-100'%></div>
                             <div class="col-5">
-                                <%=link_to room.room_name,"#"%>
+                                <%=link_to room.room_name,room_path(room)%>
                             </div>
                             <div class="col-4 text-right">
                                 <%= link_to 'Update',room_room_path(room),class: 'btn btn-info'%>

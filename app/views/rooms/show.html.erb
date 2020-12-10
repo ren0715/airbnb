@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="container">
+        <%=image_tag @room.photos.first.image, class: 'w-100'%>
+        <div class="row">
+            <div class="col-md-8 my-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1>
+                            <%=@room.room_name%>
+                        </h1>
+                        <p>
+                            <%=@room.address%>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <%= image_tag(current_user.get_gravatar, alt: current_user.name, class: 'rounded-circle w-50')%>
+                        <p>
+                            <%=@room.user.name%>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row my-4">
+                    <div class="col-md-3 text-center">
+                        <i class="fa fa-home fa-2x"></i>
+                        <h6><%=@room.home_type%></h6>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <i class="fa fa-user fa-2x"></i>
+                        <h6><%= pluralize(@room.guest_count, "Guest") %></h6>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <i class="fa fa-bed fa-2x"></i>
+                        <h6><%= pluralize(@room.bedroom_count, "Bedroom") %></h6>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <i class="fa fa-bath fa-2x"></i>
+                        <h6><%= pluralize(@room.bathroom_count, "Bathroom") %></h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="my-4">
+                    <h3>About this room</h3>
+                    <p style="">
+                        <%=@room.summary%>
+                    </p>
+                </div>
+                <hr>
+                <div class="row my-4">
+                    <div class="col-md-4">
+                        <h3>Amenities</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <% if @room.has_tv? %>
+                                    <p>TV</p>
+                                <% else %>
+                                    <p class="text-secondary"><s>TV</s></p>
+                                <% end %>
+                            </div>
+                            <div class="col-md-4">
+                                <% if @room.has_kitchen? %>
+                                    <p>Kitchen</p>
+                                <% else %>
+                                    <p class="text-secondary"><s>Kitchen</s></p>
+                                <% end %>
+                            </div>
+                            <div class="col-md-4">
+                                <% if @room.has_internet? %>
+                                    <p>Internet</p>
+                                <% else %>
+                                    <p class="text-secondary"><s>Internet</s></p>
+                                <% end %>
+                            </div>
+                            <div class="col-md-4">
+                                <% if @room.has_heating? %>
+                                    <p>Heating</p>
+                                <% else %>
+                                    <p class="text-secondary"><s>Heating</s></p>
+                                <% end %>
+                            </div>
+                            <div class="col-md-4">
+                                <% if @room.has_air_conditioning? %>
+                                    <p>Air Conditioning</p>
+                                <% else %>
+                                    <p class="text-secondary"><s>Air Conditioning</s></p>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <% @room.photos.each do |photo|%>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="<%=photo.id%>"></li>
+                        <% end %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <% @room.photos.each do |photo|%>
+                            <div class="carousel-item <%= photo.id == @room.photos.first.id ? 'active' : '' %>">
+                                <%= image_tag photo.image, class: "w-100" %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
