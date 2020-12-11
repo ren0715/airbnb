@@ -78,3 +78,5 @@ gem 'yaml_db'
 gem 'devise'
 
 gem 'activestorage'
+
+gem 'geocoder', '~> 1.4'
