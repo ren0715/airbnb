@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-img-top">
+                        <%= image_tag(@user.get_gravatar, alt: @user.name, class: 'w-100')%>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="text-center">Verification</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">Facebook</div>
+                            <div class="col-4">
+                                <i class="fa fa-check text-success float-right"></i>
+                            </div>
+
+                            <div class="col-8">Phone Number</div>
+                            <div class="col-4">
+                                <i class="fa fa-times text-danger float-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1>
+                    <%=@user.name%>
+                </h1>
+                <hr>
+                <h3>
+                    Rooms (<%=@rooms.count%>)
+                </h3>
+                <div class="row">
+                    <% @rooms.each do |room|%>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-img-top">
+                                    <%=image_tag room.photos.first.image, class: 'w-100'%>
+                                </div>
+                                <div class="card-body">
+                                    <h3>
+                                        <%=link_to room.room_name,room_path(room)%>
+                                    </h3>
+                                    <p>
+                                        $<%=room.price%> - 
+                                        <%=room.room_type%> - 
+                                        <%= pluralize(room.bedroom_count, "Bedroom") %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="paginate text-center">
+                    <%= will_paginate @rooms%>
+                </div>
+                <hr>
+                <h3>
+                    Reviews From Guests ()
+                </h3>
+                <hr>
+                <h3>
+                    Reviews From Hosts ()
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
