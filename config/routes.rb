@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       get 'photos'
       get 'amenities'
       get 'location'
+      get 'preview'
+      get 'preload'
     end
     resources :photos, only: [:create, :destroy]
   end
