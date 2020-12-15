@@ -246,7 +246,7 @@
                                         success: function(data) {
                                             $.each(data, function(arrID, arrValue){
                                                 for(var d = new Date(arrValue.start_date); d <= new Date(arrValue.end_date); d.setDate(d.getDate + 1)){
-                                                    unavailableDates.push($.datepicker.formatDate('d-m-y' , d));
+                                                    unavailableDates.push($.datepicker.formatDate('d-m-yy' , d));
                                                 }
                                             });
 
@@ -305,6 +305,41 @@
                                                 onSelect: function(selected){
                                                     $('#start_date').datepicker("option", "minDate", selected);
 
+                                                    var start_date = $('#stard_date').datepicker('getDate');
+                                                    var end_date = $('#end_date').datepicker('getDate');
+                                                    var nights = (end_date - start_date)/100/60/60/24;
+                                                    
+                                                    var input = {
+                                                        'start_date' : start_date,
+                                                        'end_date': end_date
+                                                    }
+
+                                                    $.ajax({
+                                                        url: '<%= preview_room_path(@room) %>',
+                                                        date: input,
+                                                        success: function(data){
+                                                            if (data.conflict) {
+                                                                $('#message').text("These dates are not available.");
+                                                                $('#price').hide();
+                                                                $('#nights').hide();
+                                                                $('#total_price').hide();
+                                                                $('#submit').attr("disabled", true);
+                                                            } else {
+                                                                $('#message').text("");
+                                                                $('#price').show();
+                                                                $('#nights').show();
+                                                                $('#total_price').show();
+                                                                $('#submit').attr("disabled", false);
+                                                                if (start_date.getTime() == end_date.getTime()) {
+                                                                nights = 1;
+                                                                }
+                                                                var total_price = @room.price * nights;
+                                                                $('#display_night_count').text(nights);
+                                                                $('#display_total_price').text(total_price);
+                                                            }
+                                                        }
+
+                                                    });
                                                 }
                                             });
                                         }
