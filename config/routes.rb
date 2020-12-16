@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :rooms do
-    resources :reservations
+    resources :reservations, only: [:create]
     member do
       get 'room'
       get 'price'
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     resources :photos, only: [:create, :destroy]
   end
+  get '/your_reservations' => 'reservations#your_reservations'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <%=render './rooms/your'%>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Your Reservations</h2>
+                </div>
+                <div class="card-body">
+                    <% @rooms.each do |room| %>
+                        <% room.reservations.each do |reservation|%>
+                            <div class="container row">
+                                <div class="col-md-3">
+                                    <%= reservation.start_date %>
+                                    <br>
+                                    ~
+                                    <br>
+                                    <%= reservation.end_date %>
+                                    
+                                </div>
+                                <div class="col-md-3"><%=image_tag room.photos.first.image, class: 'w-100'%></div>
+                                <div class="col-md-3">
+                                    <p>
+                                        <%=link_to room.room_name,room_path(room)%>
+                                    </p>
+                                    <div>
+                                        <%= image_tag(reservation.user.get_gravatar, alt: reservation.user.name, class: 'rounded-circle w-25')%>
+                                        <span>
+                                            <%=link_to reservation.user.name,user_path(reservation.user)%>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <%= link_to 'Review Guest',"#",class: 'btn btn-info'%>
+                                </div>
+                            </div>
+                            <hr>
+                        <% end %>
+                        
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
