@@ -22,11 +22,13 @@ class ReservationsController < ApplicationController
 
   def your_reservations
     @rooms = current_user.rooms.all
+    @review = Review.new
   end
 
   def your_trips
     @users = User.all
     @reservations = current_user.reservations.all
+    @review = Review.new
   end
 
   private
