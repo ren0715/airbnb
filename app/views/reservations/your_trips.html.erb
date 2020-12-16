@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <%=render './rooms/your'%>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Your Trips</h2>
+                </div>
+                <div class="card-body">
+                    <% @reservations.each do |reservation|%>
+                        <div class="container row">
+                            <div class="col-md-3 mt-2 pl-5">
+                                <%= reservation.start_date %>
+                                <br>
+                                ~
+                                <br>
+                                <%= reservation.end_date %>
+                                
+                            </div>
+                            <div class="col-md-3"><%=image_tag reservation.room.photos.first.image, class: 'w-100', style: 'height: 100px;'%></div>
+                            <div class="col-md-3">
+                                <p>
+                                    <%=link_to reservation.room.room_name,room_path(reservation.room)%>
+                                </p>
+                                <div>
+                                    Host:
+                                    <%= image_tag(reservation.room.user.get_gravatar, alt: reservation.room.user.name, class: 'rounded-circle w-25')%>
+                                    <span>
+                                        <%=link_to reservation.room.user.name,user_path(reservation.room.user)%>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-right mt-4">
+                                <%= link_to 'Review Host',"#",class: 'btn btn-info'%>
+                            </div>
+                        </div>
+                        <hr>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
