@@ -12,7 +12,7 @@
                     <% @rooms.each do |room| %>
                         <% room.reservations.each do |reservation|%>
                             <div class="container row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-2 pl-5">
                                     <%= reservation.start_date %>
                                     <br>
                                     ~
@@ -20,19 +20,21 @@
                                     <%= reservation.end_date %>
                                     
                                 </div>
-                                <div class="col-md-3"><%=image_tag room.photos.first.image, class: 'w-100'%></div>
+                                <div class="col-md-3"><%=image_tag room.photos.first.image, class: 'w-100', style: 'height: 100px;'%></div>
                                 <div class="col-md-3">
                                     <p>
                                         <%=link_to room.room_name,room_path(room)%>
                                     </p>
                                     <div>
+                                        Reserved by:
+                                        <br>
                                         <%= image_tag(reservation.user.get_gravatar, alt: reservation.user.name, class: 'rounded-circle w-25')%>
                                         <span>
                                             <%=link_to reservation.user.name,user_path(reservation.user)%>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 text-right">
+                                <div class="col-md-3 text-right mt-4">
                                     <%= link_to 'Review Guest',"#",class: 'btn btn-info'%>
                                 </div>
                             </div>

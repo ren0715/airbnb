@@ -26,11 +26,7 @@ class RoomsController < ApplicationController
   def update
     @final_params = is_ready?(@room) ? room_params.merge(is_active: true) : room_params
     if @room.update(@final_params)
-      if @room.is_active
-        redirect_to root_url
-      else
-        redirect_to request.referrer
-      end
+      redirect_to request.referrer
     else
       render 'room'
     end

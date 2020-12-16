@@ -24,6 +24,11 @@ class ReservationsController < ApplicationController
     @rooms = current_user.rooms.all
   end
 
+  def your_trips
+    @users = User.all
+    @reservations = current_user.reservations.all
+  end
+
   private
   def reservation_params
     params.require(:reservation).permit(:start_date, :end_date)
