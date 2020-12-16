@@ -69,7 +69,6 @@ class RoomsController < ApplicationController
     output = {
       conflict: is_conflict(start_date, end_date, @room)
     }
-
     render json: output
   end
 
