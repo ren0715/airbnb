@@ -50,13 +50,13 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <%= form_for @review do |f|%>
+                                        <%= form_for @review, url:reviews_path(reservation_id: reservation.id) do |f| %>
                                             <div class="modal-body">
                                                 <%= f.text_area :content, class: 'form-control w-100 mx-auto' %>
                                             </div>
                                             <%= f.hidden_field :host_id, value: reservation.room.user.id%>
                                             <%= f.hidden_field :guest_id, value: reservation.user.id%>
-                                            <%= f.hidden_field :room_id, value: reservation.room.id%>
+                                            <%= f.hidden_field :reservation_id, value: reservation.id%>
                                             <div class="modal-footer">
                                                 <div class="ml-2 mx-auto">
                                                     <%= f.submit 'Add Review',class: 'btn btn-info form-control'%>

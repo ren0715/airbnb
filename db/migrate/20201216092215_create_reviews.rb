@@ -3,7 +3,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
     create_table :reviews do |t|
       t.integer :host_id
       t.integer :guest_id
-      t.integer :room_id
+      t.integer :reservation_id
       t.integer :rate
       t.text :content
 

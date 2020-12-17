@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     resources :photos, only: [:create, :destroy]
   end
+
   get '/your_reservations' => 'reservations#your_reservations'
   get '/your_trips' => 'reservations#your_trips'
   devise_for :users, controllers: {

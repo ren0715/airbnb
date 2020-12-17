@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_092215) do
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "host_id"
     t.integer "guest_id"
-    t.integer "room_id"
+    t.integer "reservation_id"
     t.integer "rate"
     t.text "content"
     t.datetime "created_at", null: false
