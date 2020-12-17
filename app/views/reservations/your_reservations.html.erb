@@ -35,15 +35,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 text-right mt-4">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal_<%=reservation.id%>">
                                         Review Guest
                                     </button>
                                 </div>
                                 <!-- Button trigger modal -->
                                 
-
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                
+                                <div class="modal fade" id="exampleModal_<%=reservation.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -56,6 +56,9 @@
                                                 <div class="modal-body">
                                                     <%= f.text_area :content, class: 'form-control w-100 mx-auto' %>
                                                 </div>
+                                                <%= f.hidden_field :host_id, value: current_user.id%>
+                                                <%= f.hidden_field :guest_id, value: reservation.user.id%>
+                                                <%= f.hidden_field :room_id, value: reservation.room.id%>
                                                 <div class="modal-footer">
                                                     <div class="ml-2 mx-auto">
                                                         <%= f.submit 'Add Review',class: 'btn btn-info form-control'%>
