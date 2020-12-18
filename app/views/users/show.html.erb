@@ -40,17 +40,26 @@
                                     <%=image_tag room.photos.first.image, class: 'w-100'%>
                                 </div>
                                 <div class="card-body">
-                                    <h3>
-                                        <%=link_to room.room_name,room_path(room)%>
-                                    </h3>
-                                    <p>
-                                        $<%=room.price%> - 
-                                        <%=room.room_type%> - 
-                                        <%= pluralize(room.bedroom_count, "Bedroom") %>
-                                    </p>
+                                    
+                                    <%=link_to room.room_name,room_path(room)%>
+                                    <br>
+                                    $<%=room.price%> - 
+                                    <%=room.room_type%> - 
+                                    <%= pluralize(room.bedroom_count, "Bedroom") %>
+                                    <br>
+                                    <div class="" id="stars_<%= room.id %>"></div>
+                                    <%= pluralize(@reviews.where(reservation_id: room.reservations.ids).count, "Reviews") %>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $('#stars_<%= room.id %>').raty({
+                                path: 'assets',
+                                scoreName: 'review[rate]',
+                                readOnly: true,
+                                score: "<%=@reviews.where(reservation_id: room.reservations.ids).average(:rate)%>"
+                            });
+                        </script>
                     <% end %>
                 </div>
                 <div class="paginate text-center">
