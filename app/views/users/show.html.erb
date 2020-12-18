@@ -48,16 +48,15 @@
                                     <%= pluralize(room.bedroom_count, "Bedroom") %>
                                     <br>
                                     <div class="" id="stars_<%= room.id %>"></div>
-                                    <%= pluralize(@reviews.where(reservation_id: room.reservations.ids).count, "Reviews") %>
+                                    <%= pluralize(room.guest_reviews.count, "Reviews") %>
                                 </div>
                             </div>
                         </div>
                         <script>
                             $('#stars_<%= room.id %>').raty({
-                                path: 'assets',
-                                scoreName: 'review[rate]',
-                                readOnly: true,
-                                score: "<%=@reviews.where(reservation_id: room.reservations.ids).average(:rate)%>"
+                                path: '/assets',
+                                score: '<%= room.average_rating %>',
+                                readOnly: true
                             });
                         </script>
                     <% end %>
@@ -67,12 +66,87 @@
                 </div>
                 <hr>
                 <h3>
-                    Reviews From Guests ()
+                    Reviews From Guests (<%=@num1%>)
                 </h3>
+                <div class="container">
+                    <% @rooms.each do |room|%>
+                        <div class="">
+                        <p class="text-center">Room: <%=link_to room.room_name,room_path(room)%></p>
+                        <hr>
+                            <% room.guest_reviews.each do |review|%>
+                                <div class="row my-3">
+                                    <div class="col-3">
+                                        <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <br>
+                                        <%=link_to review.user.name,user_path(review.user)%>
+                                    </div>
+                                    <div class="col-3 mt-3">
+                                        <div class="" id="stars_guest_<%= review.id %>"></div>
+                                    </div>
+                                    <div class="col-6">
+                                        Comment: <%= review.content %>
+                                        <br>
+                                        <%= review.reservation.start_date %>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <script>
+                                    $('#stars_guest_<%= review.id %>').raty({
+                                        path: '/assets',
+                                        score: '<%= review.rate.to_i %>',
+                                        readOnly: true
+                                    });
+                                </script>
+                            <% end %>
+                        </div>
+                        
+                        
+                    <% end %>
+                </div>
                 <hr>
                 <h3>
-                    Reviews From Hosts ()
+                    Reviews From Hosts (<%=@num2%>)
                 </h3>
+                <div class="container">
+                    <% @rooms.each do |room|%>
+                        <div class="">
+                            <% room.host_reviews.each do |review|%>
+                                <div class="row my-3">
+                                    <div class="col-3">
+                                        <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <br>
+                                        <%=link_to review.user.name,user_path(review.user)%>
+                                    </div>
+                                    <div class="col-3 mt-3">
+                                        <div class="" id="stars_host_<%= review.id %>"></div>
+                                    </div>
+                                    <div class="col-6">
+                                        
+                                        Room: <%=link_to room.room_name,room_path(room)%>
+                                        <br>
+                                        User: <%=link_to @users.find_by(id: review.guest_id).name,user_path(@users.find_by(id: review.guest_id))%>
+                                        <br>
+                                        Comment: <%= review.content %>
+                                        <br>
+                                        <%= review.reservation.start_date %>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <script>
+                                    $('#stars_host_<%= review.id %>').raty({
+                                        path: '/assets',
+                                        score: '<%= review.rate.to_i %>',
+                                        readOnly: true
+                                    });
+                                </script>
+                            <% end %>
+                        </div>
+                        
+                        
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>

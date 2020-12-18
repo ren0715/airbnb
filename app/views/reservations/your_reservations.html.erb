@@ -52,7 +52,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <%= form_for @review, url:reviews_path(reservation_id: reservation.id)  do |f| %>
+                                            <%= form_for @review do |f| %>
                                                 <div class="modal-body">
                                                     <div class="text-center" id="stars_<%= reservation.id %>"></div>
                                                     <br>
@@ -61,6 +61,7 @@
                                                 <%= f.hidden_field :user_id, value: current_user.id%>
                                                 <%= f.hidden_field :host_id, value: current_user.id%>
                                                 <%= f.hidden_field :guest_id, value: reservation.user.id%>
+                                                <%= f.hidden_field :reservation_id, value: reservation.id%>
                                                 <div class="modal-footer">
                                                     <div class="ml-2 mx-auto">
                                                         <%= f.submit 'Add Review',class: 'btn btn-info form-control'%>

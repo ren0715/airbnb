@@ -16,7 +16,7 @@
                             <%= pluralize(room.bedroom_count, "Bedroom") %>
                             <br>
                             <div class="" id="stars_<%= room.id %>"></div>
-                            <%= pluralize(@reviews.where(reservation_id: room.reservations.ids).count, "Reviews") %>
+                            <%= pluralize(room.guest_reviews.count, "Review") %>
 
                         </div>
                     </div>
@@ -24,9 +24,8 @@
                 <script>
                     $('#stars_<%= room.id %>').raty({
                         path: 'assets',
-                        scoreName: 'review[rate]',
-                        readOnly: true,
-                        score: "<%=@reviews.where(reservation_id: room.reservations.ids).average(:rate)%>"
+                        score: '<%= room.average_rating %>',
+                        readOnly: true
                     });
                 </script>
             <% end %>
