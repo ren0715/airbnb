@@ -8,12 +8,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <%= f.label :range, "Price Range"%>
+                                <div id="slider-range"></div>
                             </div>
                             <div class="col-md-3">
                                 <%= f.label :price, "Min Price:"%>
+                                <%= text_field_tag "100", :price, id: "amountMin" %>
                             </div>
                             <div class="col-md-3">
                                 <%= f.label :price, "Max Price"%>
+                                <%= text_field_tag "1000", :price, id: "amountMax" %>
                             </div>
                         </div>
                         <hr>
@@ -138,5 +141,23 @@
         onSelect: function(selected) {
             $('#start_date').datepicker("option", "maxDate", selected);
         }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 1000,
+        values: [ 100, 1000 ],
+        slide: function( event, ui ) {
+            $( "#amountMin" ).val( ui.values[ 0 ] );
+            $( "#amountMax" ).val( ui.values[ 1 ] );
+        }
+        });
+        $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+        $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
     });
 </script>
