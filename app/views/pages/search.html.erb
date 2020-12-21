@@ -1,0 +1,163 @@
+<div class="container" id="left">
+    <div class="">
+        <div class="">
+            <button class="btn btn-success my-4" type="button" data-toggle="collapse" data-target="#collapse-panel">More Filter</button>
+            <div class="collapse" id="collapse-panel">
+                <div class="card card-body">
+                    <%= form_for '' do |f| %>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= f.label :range, "Price Range"%>
+                                <div id="slider-range"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <%= f.label :price, "Min Price:"%>
+                                <%= text_field_tag "100", :price, id: "amountMin" %>
+                            </div>
+                            <div class="col-md-3">
+                                <%= f.label :price, "Max Price"%>
+                                <%= text_field_tag "1000", :price, id: "amountMax" %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%=f.text_field :start_date,class: 'btn btn-light w-100 text-center', id: "start_date", placeholder: "Start Date",readonly: true%>
+                            </div>
+                            <div class="col-md-6">
+                                <%=f.text_field :end_date,class: 'btn btn-light w-100 text-center', id: "end_date", placeholder: "End Date", disabled: true,readonly: true%>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <%= f.check_box :home_type, class: '' %>
+                                <%= f.label :home_type, 'Apartment' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :home_type, class: '' %>
+                                <%= f.label :home_type, 'House' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :home_type, class: '' %>
+                                <%= f.label :home_type, 'Bed & Breakfast' %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <%= f.check_box :room_type,value: 'Entire', class: '' %>
+                                <%= f.label :room_type, 'Entire' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :room_type,value: 'Private', class: '' %>
+                                <%= f.label :room_type, 'Private' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :room_type,value: 'Shared', class: '' %>
+                                <%= f.label :room_type, 'Shared' %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">  
+                            <div class="col-md-4">
+                                <%= f.label :guest_count, 'Guests' %>
+                                <%= f.select :guest_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                    
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.label :bedroom_count, 'Bedrooms' %>
+                                <%= f.select :bedroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                        
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.label :bathroom_count, 'Bathrooms' %>
+                                <%= f.select :bathroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                        
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <%= f.check_box :has_tv, class: '' %>
+                                <%= f.label :has_tv, 'TV' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :has_kitchen, class: '' %>
+                                <%= f.label :has_kitchen, 'Kitchen' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :has_internet, class: '' %>
+                                <%= f.label :has_internet, 'Internet' %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <%= f.check_box :has_heating, class: '' %>
+                                <%= f.label :has_heating, 'Heating' %>
+                            </div>
+                            <div class="col-md-4">
+                                <%= f.check_box :has_air_conditioning, class: '' %>
+                                <%= f.label :has_air_conditioning, 'Air Conditioning' %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <%= f.submit "Search",class: 'btn btn-success mt-3 float-right'%>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="container">
+                <h1>Home</h1>
+                <%=render 'rooms'%>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<div id="right" class="bg-info">
+        
+</div>
+<script>
+    $('#start_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        minDate: 0,
+        maxDate: '3m',
+        onSelect: function(selected) {
+            $('#end_date').datepicker("option", "minDate", selected);
+            $('#end_date').attr("disabled", false);
+        }
+    });
+    $('#end_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        minDate: 0,
+        maxDate: '3m',
+        onSelect: function(selected) {
+            $('#start_date').datepicker("option", "maxDate", selected);
+        }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 1000,
+        values: [ 100, 1000 ],
+        slide: function( event, ui ) {
+            $( "#amountMin" ).val( ui.values[ 0 ] );
+            $( "#amountMax" ).val( ui.values[ 1 ] );
+        }
+        });
+        $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+        $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
+    });
+</script>

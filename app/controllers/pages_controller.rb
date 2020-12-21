@@ -7,4 +7,8 @@ class PagesController < ApplicationController
     #   review.user_id == reveiw.host_id 
     # end
   end
+
+  def search
+    @rooms = Room.where(is_active: true)
+  end
 end

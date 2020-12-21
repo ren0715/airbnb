@@ -1,35 +1,46 @@
 <div class="container">
     <div class="container">
-        <h1>Home</h1>
-        <div class="row">
-            <% @rooms.each do |room|%>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-img-top">
-                            <%=image_tag room.photos.first.image, class: 'w-100', style: 'height: 200px;'%>
-                        </div>
-                        <div class="card-body">
-                            <%=link_to room.room_name,room_path(room)%>
-                            <br>
-                            $<%=room.price%> - 
-                            <%=room.room_type%> - 
-                            <%= pluralize(room.bedroom_count, "Bedroom") %>
-                            <br>
-                            <div class="" id="stars_<%= room.id %>"></div>
-                            <%= pluralize(room.guest_reviews.count, "Review") %>
-
-                        </div>
-                    </div>
+        <h4 class="text-center">Book unique places to stay and things to do.</h4>
+        <form action="/search" accept-charset="UTF-8" method="get">
+        <%= form_for '@' do |f| %>
+            <div class="row mx-auto py-5">
+                <div class="col-md-6">
+                    <%= f.text_field :search,class: 'form-control', id: "search", placeholder: "Where are you going?"%>
                 </div>
-                <script>
-                    $('#stars_<%= room.id %>').raty({
-                        path: 'assets',
-                        score: '<%= room.average_rating %>',
-                        readOnly: true
-                    });
-                </script>
-            <% end %>
-        </div>
+                <div class="col-md-2">
+                    <%=f.text_field :start_date,class: 'btn btn-light w-100 text-center', id: "start_date", placeholder: "Start Date",readonly: true%>
+                </div>
+                <div class="col-md-2">
+                    <%=f.text_field :end_date,class: 'btn btn-light w-100 text-center', id: "end_date", placeholder: "End Date", disabled: true,readonly: true%>
+                </div>        
+                <div class="col-md-2">
+                    <%= f.submit "Search",class: 'btn btn-success w-100', id: 'submit' %>
+                </div>     
+            </div>  
+        <% end %>
+        <script>
+            $('#start_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: 0,
+                maxDate: '3m',
+                onSelect: function(selected) {
+                    $('#end_date').datepicker("option", "minDate", selected);
+                    $('#end_date').attr("disabled", false);
+                }
+            });
+            $('#end_date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: 0,
+                maxDate: '3m',
+                onSelect: function(selected) {
+                    $('#start_date').datepicker("option", "maxDate", selected);
+                }
+            });
+        </script>
+    </div>
+    <div class="container">
+        <h1>Home</h1>
+        <%=render 'rooms'%>
         <div class="paginate text-center">
             <%= will_paginate @rooms%>
         </div>
