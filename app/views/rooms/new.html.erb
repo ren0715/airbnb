@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <%= form_for @room do |f| %>
-                <div class="container row">
+                <div class="row">
                     <div class="col-md-4 field form-group">
                         <%= f.label :home_type, 'Home Type' %>
                         <%= f.select :home_type, {'Apartment': 'Apartment', 'House': 'House', 'Bed & Breakfast': 'Bed & Breakfast'}, { include_blank: 'Select...'}, { class: 'form-control w-100' , required: true } %>
