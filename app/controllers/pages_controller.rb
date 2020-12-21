@@ -9,6 +9,6 @@ class PagesController < ApplicationController
   end
 
   def search
-    
+    @rooms = Room.where(is_active: true)
   end
 end
