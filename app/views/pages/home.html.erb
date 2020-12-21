@@ -3,23 +3,31 @@
         <h1>Home</h1>
         <div class="row">
             <% @rooms.each do |room|%>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-img-top">
                             <%=image_tag room.photos.first.image, class: 'w-100', style: 'height: 200px;'%>
                         </div>
                         <div class="card-body">
-                            <h3>
-                                <%=link_to room.room_name,room_path(room)%>
-                            </h3>
-                            <p>
-                                $<%=room.price%> - 
-                                <%=room.room_type%> - 
-                                <%= pluralize(room.bedroom_count, "Bedroom") %>
-                            </p>
+                            <%=link_to room.room_name,room_path(room)%>
+                            <br>
+                            $<%=room.price%> - 
+                            <%=room.room_type%> - 
+                            <%= pluralize(room.bedroom_count, "Bedroom") %>
+                            <br>
+                            <div class="" id="stars_<%= room.id %>"></div>
+                            <%= pluralize(room.guest_reviews.count, "Review") %>
+
                         </div>
                     </div>
                 </div>
+                <script>
+                    $('#stars_<%= room.id %>').raty({
+                        path: 'assets',
+                        score: '<%= room.average_rating %>',
+                        readOnly: true
+                    });
+                </script>
             <% end %>
         </div>
         <div class="paginate text-center">

@@ -121,7 +121,40 @@
 
                 <hr>
                 <div class="container">
-                    <h3>Reviews</h3>
+                    <h3><%= pluralize(@room.guest_reviews.count, "Review") %><span class="ml-5"id="stars"></span></h3>
+                    <script>
+                        $('#stars').raty({
+                            path: '/assets',
+                            score: '<%= @room.average_rating %>',
+                            readOnly: true
+                        });
+                    </script>
+                    <div class="container">
+                        <% @room.guest_reviews.each do |review|%>
+                            <div class="row my-3">
+                                <div class="col-3 mt-2">
+                                    <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                    <br>
+                                    <%=link_to review.user.name,user_path(review.user)%>
+                                </div>
+                                <div class="col-9">
+                                    <div class="" id="stars_guest_<%= review.id %>"></div>
+                                    Comment: <%= review.content %>
+                                    <br>
+                                    <%= review.reservation.start_date %>
+                                </div>
+                            </div>
+                            
+                            <script>
+                                $('#stars_guest_<%= review.id %>').raty({
+                                    path: '/assets',
+                                    score: '<%= review.rate.to_i %>',
+                                    readOnly: true
+                                });
+                            </script>
+                        <% end %>
+                            
+                    </div>
                 </div>
 
                 <hr>

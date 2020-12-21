@@ -1,10 +1,9 @@
 class ReviewsController < ApplicationController
 
   def create
-    @reservation = Reservation.find(params[:reservation_id])
-    @review = @reservation.reviews.new(review_params)
-    
-    if @reservation.reviews.where(host_id: @review.host_id, guest_id: @review.guest_id).any?
+    @review = Review.new(review_params)
+    @reservation = Reservation.find_by(id: @review.reservation_id)
+    if @reservation.reviews.where(user_id: @review.user_id, host_id: @review.host_id, guest_id: @review.guest_id).any?
       flash[:alert] = "You already reviewed this reservation."
       redirect_to request.referrer
     else
@@ -17,6 +16,6 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:host_id, :guest_id, :content, :rate)
+    params.require(:review).permit(:user_id, :host_id, :guest_id, :content, :rate, :reservation_id)
   end
 end
