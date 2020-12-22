@@ -33,30 +33,30 @@
                         <hr>
                         <div class="row mb-4">
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '', id: "apartment" %>
+                                <%= check_box_tag "q[home_type_eq_any][]", "Apartment" %>
                                 <%= f.label :home_type, 'Apartment', id: "apartment"  %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '' , id: "house" %>
+                                <%= check_box_tag "q[home_type_eq_any][]", "House" %>
                                 <%= f.label :home_type, 'House', id: "house" %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '' , id: "bed&breakfast"%>
+                                <%= check_box_tag "q[home_type_eq_any][]", "Bed & Breakfast" %>
                                 <%= f.label :home_type, 'Bed & Breakfast' , id: "bed&breakfast"%>
                             </div>
                         </div>
                         <hr>
                         <div class="row mb-4">
                             <div class="col-md-4">
-                                <%= f.check_box :room_type,value: 'Entire', class: '' %>
+                                <%= check_box_tag "q[room_type_eq_any][]", "Entire" %>
                                 <%= f.label :room_type, 'Entire' %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :room_type,value: 'Private', class: '' %>
+                                <%= check_box_tag "q[room_type_eq_any][]", "Private" %>
                                 <%= f.label :room_type, 'Private' %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :room_type,value: 'Shared', class: '' %>
+                                <%= check_box_tag "q[room_type_eq_any][]", "Shared" %>
                                 <%= f.label :room_type, 'Shared' %>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="row">  
                             <div class="col-md-4">
                                 <%= f.label :guest_count, 'Guests' %>
-                                <%= f.select :guest_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
+                                <%= f.select :guest_count_gteq, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, { class: 'form-control' , required: true } %>
                     
                             </div>
                             <div class="col-md-4">
@@ -81,25 +81,25 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <%= f.check_box :has_tv, class: '' %>
+                                <%= check_box_tag "q[has_tv_eq]", true %>
                                 <%= f.label :has_tv, 'TV' %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :has_kitchen, class: '' %>
+                                <%= check_box_tag "q[has_kitchen_eq]", true %>
                                 <%= f.label :has_kitchen, 'Kitchen' %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :has_internet, class: '' %>
+                                <%= check_box_tag "q[has_internet_eq]", true %>
                                 <%= f.label :has_internet, 'Internet' %>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <%= f.check_box :has_heating, class: '' %>
+                                <%= check_box_tag "q[has_heating_eq]", true %>
                                 <%= f.label :has_heating, 'Heating' %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :has_air_conditioning, class: '' %>
+                                <%= check_box_tag "q[has_air_conditioning_eq]", true %>
                                 <%= f.label :has_air_conditioning, 'Air Conditioning' %>
                             </div>
                         </div>
