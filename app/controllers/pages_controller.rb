@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   end
 
   def search
+    @search = Room.where(is_active: true).ransack(params[:q])
     @rooms = Room.where(is_active: true)
   end
 end

@@ -4,7 +4,7 @@
             <button class="btn btn-success my-4" type="button" data-toggle="collapse" data-target="#collapse-panel">More Filter</button>
             <div class="collapse" id="collapse-panel">
                 <div class="card card-body">
-                    <%= form_for '' do |f| %>
+                    <%= search_form_for @search, url: search_path do |f| %>
                         <div class="row">
                             <div class="col-md-6">
                                 <%= f.label :range, "Price Range"%>
@@ -12,35 +12,37 @@
                             </div>
                             <div class="col-md-3">
                                 <%= f.label :price, "Min Price:"%>
-                                <%= text_field_tag "100", :price, id: "amountMin" %>
+                                <%= f.text_field :price_gteq, id: "amountMin" %>
                             </div>
                             <div class="col-md-3">
                                 <%= f.label :price, "Max Price"%>
-                                <%= text_field_tag "1000", :price, id: "amountMax" %>
+                                <%= f.text_field :price_lteq, id: "amountMax" %>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                <%=f.text_field :start_date,class: 'btn btn-light w-100 text-center', id: "start_date", placeholder: "Start Date",readonly: true%>
+                                <%#f.text_field :start_date,class: 'btn btn-light w-100 text-center', id: "start_date", placeholder: "Start Date",readonly: true%>
+                                <%= text_field_tag :start_date, params[:start_date], readonly: true, id: "start_date", placeholder: "Start Date",class: 'btn btn-light w-100 text-center' %>
                             </div>
                             <div class="col-md-6">
-                                <%=f.text_field :end_date,class: 'btn btn-light w-100 text-center', id: "end_date", placeholder: "End Date", disabled: true,readonly: true%>
+                                <%= text_field_tag :end_date, params[:end_date], readonly: true, id: "end_date", placeholder: "End Date", disabled: true,class: 'btn btn-light w-100 text-center' %>
+                                <%#=f.text_field :end_date,class: 'btn btn-light w-100 text-center', id: "end_date", placeholder: "End Date", disabled: true,readonly: true%>
                             </div>
                         </div>
                         <hr>
                         <div class="row mb-4">
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '' %>
-                                <%= f.label :home_type, 'Apartment' %>
+                                <%= f.check_box :home_type, class: '', id: "apartment" %>
+                                <%= f.label :home_type, 'Apartment', id: "apartment"  %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '' %>
-                                <%= f.label :home_type, 'House' %>
+                                <%= f.check_box :home_type, class: '' , id: "house" %>
+                                <%= f.label :home_type, 'House', id: "house" %>
                             </div>
                             <div class="col-md-4">
-                                <%= f.check_box :home_type, class: '' %>
-                                <%= f.label :home_type, 'Bed & Breakfast' %>
+                                <%= f.check_box :home_type, class: '' , id: "bed&breakfast"%>
+                                <%= f.label :home_type, 'Bed & Breakfast' , id: "bed&breakfast"%>
                             </div>
                         </div>
                         <hr>
