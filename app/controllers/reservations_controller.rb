@@ -5,6 +5,8 @@ class ReservationsController < ApplicationController
 
     if current_user == room.user
       flash[:alert] = "You cannot book your own property!"
+    elsif current_user == nil
+      flash[:alert] = "Please log in!"
     else
       start_date = Date.parse(reservation_params[:start_date])
       end_date = Date.parse(reservation_params[:end_date])
