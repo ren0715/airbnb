@@ -4,7 +4,11 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-img-top">
-                        <%= image_tag(@user.get_gravatar, alt: @user.name, class: 'w-100')%>
+                        <% if @user.image %>
+                            <%= image_tag(@user.image, alt: @user.name, class: 'w-100')%>
+                        <% else %>
+                            <%= image_tag(@user.get_gravatar, alt: @user.name, class: 'w-100')%>
+                        <% end %>
                     </div>
                     <div class="card-header">
                         <h3 class="text-center">Verification</h3>
@@ -76,7 +80,11 @@
                             <% room.guest_reviews.each do |review|%>
                                 <div class="row my-3">
                                     <div class="col-3">
-                                        <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% if review.user.image %>
+                                            <%= image_tag(review.user.image, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% else %>
+                                            <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% end %>
                                         <br>
                                         <%=link_to review.user.name,user_path(review.user)%>
                                     </div>
@@ -114,7 +122,11 @@
                             <% room.host_reviews.each do |review|%>
                                 <div class="row my-3">
                                     <div class="col-3">
-                                        <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% if review.user.image %>
+                                            <%= image_tag(review.user.image, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% else %>
+                                            <%= image_tag(review.user.get_gravatar, alt: review.user.name, class: 'rounded-circle w-25')%>
+                                        <% end %>
                                         <br>
                                         <%=link_to review.user.name,user_path(review.user)%>
                                     </div>
