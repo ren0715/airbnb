@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   get '/your_trips' => 'reservations#your_trips'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
   resources :users
   resources :reviews
   root 'pages#home'

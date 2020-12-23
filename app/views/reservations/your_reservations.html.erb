@@ -28,7 +28,11 @@
                                     <div>
                                         Reserved by:
                                         <br>
-                                        <%= image_tag(reservation.user.get_gravatar, alt: reservation.user.name, class: 'rounded-circle w-25')%>
+                                        <% if reservation.user.image %>
+                                            <%= image_tag(reservation.user.image, alt: reservation.user.name, class: 'rounded-circle w-25')%>
+                                        <% else %>
+                                            <%= image_tag(reservation.user.get_gravatar, alt: reservation.user.name, class: 'rounded-circle w-25')%>
+                                        <% end %>
                                         <span>
                                             <%=link_to reservation.user.name,user_path(reservation.user)%>
                                         </span>

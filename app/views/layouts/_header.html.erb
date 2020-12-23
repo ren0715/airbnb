@@ -19,7 +19,11 @@
                 <% if user_signed_in?%>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                            <%= image_tag(current_user.get_gravatar, alt: current_user.name, class: 'rounded-circle w-25')%>
+                            <% if current_user.image %>
+                                <%= image_tag(current_user.image, alt: current_user.name, class: 'rounded-circle w-25')%>
+                            <% else %>
+                                <%= image_tag(current_user.get_gravatar, alt: current_user.name, class: 'rounded-circle w-25')%>
+                            <% end %>
                             <%= current_user.name %>
                         </a>
 

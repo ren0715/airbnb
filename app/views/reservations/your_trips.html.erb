@@ -26,7 +26,11 @@
                                 </p>
                                 <div>
                                     Host:
-                                    <%= image_tag(reservation.room.user.get_gravatar, alt: reservation.room.user.name, class: 'rounded-circle w-25')%>
+                                    <% if reservation.room.user.image %>
+                                            <%= image_tag(reservation.room.user.image, alt: reservation.room.user.name, class: 'rounded-circle w-25')%>
+                                        <% else %>
+                                            <%= image_tag(reservation.room.user.get_gravatar, alt: reservation.room.user.name, class: 'rounded-circle w-25')%>
+                                        <% end %>
                                     <span>
                                         <%=link_to reservation.room.user.name,user_path(reservation.room.user)%>
                                     </span>

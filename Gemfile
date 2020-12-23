@@ -85,3 +85,7 @@ gem 'jquery-ui-rails', '~> 5.0'
 
 gem 'ransack', '~> 2.0'
 
+gem 'omniauth'
+
+gem 'omniauth-facebook'
+
