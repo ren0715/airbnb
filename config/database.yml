@@ -52,3 +52,9 @@ production:
   database: airbnb_ren_production
   username: airbnb_ren
   password: <%= ENV['AIRBNB_REN_DATABASE_PASSWORD'] %>
+  
+production:
+    <<: *default
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
