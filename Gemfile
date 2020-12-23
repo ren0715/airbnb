@@ -89,3 +89,4 @@ gem 'omniauth'
 
 gem 'omniauth-facebook'
 
+gem 'toastr-rails'
