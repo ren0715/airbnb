@@ -12,6 +12,8 @@ class PagesController < ApplicationController
     # step 1 get the location and assign to a variable
     if params[:search].present? && params[:search].strip != ""
       session[:loc_search] = params[:search]
+    else
+      session[:loc_search] = ""
     end
     # step 2 filter using address.
     if session[:loc_search] && session[:loc_search] != ""
@@ -25,7 +27,7 @@ class PagesController < ApplicationController
 
     @rooms_array = @rooms.to_a
     # step 4 filter using the date.
-    if params[:start_date] && params[:end_date]
+    if params[:start_date] && params[:end_date] && !params[:start_date].empty? && !params[:end_date].empty?
       start_date = Date.parse(params[:start_date])
       end_date = Date.parse(params[:end_date])
 
